@@ -6,7 +6,9 @@ var ballY = 50;
 var ballSpeedX = 10;
 var ballSpeedY = 4;
 var paddle1Y = 210;
+var paddle2Y = 210;
 const PADDLE_HEIGHT = 100;
+const PADDLE_THICKNESS = 15;
 
 // Main Game Logic
 
@@ -44,10 +46,18 @@ function movement(){
   ballY = ballY + ballSpeedY;
 
   if(ballX < 0){
-    ballSpeedX = -ballSpeedX;
+    if(ballY > paddle1Y && ballY < paddle1Y+PADDLE_HEIGHT){
+      ballSpeedX = -ballSpeedX;
+    } else{
+      ballRest();
+    }
   }
   if(ballX > canvas.width){
-    ballSpeedX = -ballSpeedX;
+    if(ballY > paddle2Y && ballY < paddle2Y+PADDLE_HEIGHT){
+      ballSpeedX = -ballSpeedX;
+    } else{
+      ballRest();
+    }
   }
   if(ballY < 0){
     ballSpeedY = -ballSpeedY;
@@ -68,9 +78,15 @@ function playArea(){
   // canvas
   colorRect(0,0,canvas.width,canvas.height,'lightsteelblue');
   // left paddle
-  colorRect(0,paddle1Y,10,PADDLE_HEIGHT,'midnightblue');
+  colorRect(0,paddle1Y,PADDLE_THICKNESS,PADDLE_HEIGHT,'midnightblue');
   // right paddle
-  colorRect(790,210,10,100,'midnightblue');
+  colorRect(canvas.width-PADDLE_THICKNESS,paddle2Y,PADDLE_THICKNESS,PADDLE_HEIGHT,'midnightblue');
   // ball
   colorRect(ballX,ballY,20,20,'midnightblue');
+}
+
+function ballRest(){
+  ballSpeedX = -ballSpeedX;
+  ballX = canvas.width/2;
+  ballY = canvas.height/2;
 }
