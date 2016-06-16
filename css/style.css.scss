@@ -1,14 +1,20 @@
-// #header-container > *{
-//   display: inline-block;
-//   text-align: center;
-//   #left-paddle{
-//     float: right;
-//   }
+body{
+  background-color: darkgrey;
+}
 
-//   #game-title{
+#header-container > *{
+  color: lightsteelblue;
+  display: inline-block;
+  margin: 0 auto;
+  font-size: 50px;
+  margin-bottom: 30px;
+}
 
-//   }
-//   #right-paddle{
-//     float: left;
-//   }
-// }
+#left-paddle, #right-paddle{
+    color: midnightblue;
+  }
+
+#gameCanvas{
+  border-radius: 10px;
+  border: 10px solid midnightblue;
+}

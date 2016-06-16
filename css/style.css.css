@@ -1,3 +1,18 @@
+body {
+  background-color: darkgrey; }
 
+#header-container > * {
+  color: lightsteelblue;
+  display: inline-block;
+  margin: 0 auto;
+  font-size: 50px;
+  margin-bottom: 30px; }
+
+#left-paddle, #right-paddle {
+  color: midnightblue; }
+
+#gameCanvas {
+  border-radius: 10px;
+  border: 10px solid midnightblue; }
 
 /*# sourceMappingURL=style.css.css.map */
