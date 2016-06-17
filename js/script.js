@@ -1,6 +1,7 @@
 // Gloabl Vars
 var canvas;
 var canvasContext;
+var start = true;
 // Balls
 var ballX = 50;
 var ballY = 50;
@@ -29,6 +30,10 @@ function calMousePos(evt){
   };
 }
 
+function clickStart(evt){
+  start = false;
+}
+
 function handleMouseClick(evt){
   if(showWin){
     score1 = 0;
@@ -40,6 +45,8 @@ function handleMouseClick(evt){
 window.onload = function(){
   canvas = document.getElementById('gameCanvas');
   canvasContext = canvas.getContext('2d');
+
+  canvas.addEventListener('mousedown', clickStart);
 
   var framesPerSecond = 30;
   setInterval(function(){
@@ -70,7 +77,7 @@ function movement(){
     return;
   }
 
-  aiPaddle();
+  // aiPaddle();
   // main function for ball movement
   ballX += ballSpeedX;
   ballY +=ballSpeedY;
@@ -117,30 +124,37 @@ function Net(){
 function playArea(){
   // canvas
   colorRect(0,0,canvas.width,canvas.height,'lightsteelblue');
-
-  if(showWin){
+  if(start){
     canvasContext.fillStyle = 'midnightblue';
+    canvasContext.font = '20px Arial';
+    canvasContext.fillText('Click to Start', 360, 300);
+  } else{
+    if(showWin){
+      canvasContext.fillStyle = 'midnightblue';
     if(score1 >= WIN_SCORE){
-      canvasContext.fillText('You Won!', 100, 150);
+      canvasContext.fillText('You Won!', 200, 150);
     }else if(score2 >= WIN_SCORE){
-      canvasContext.fillText('Computer Won!', canvas.width-100, 150);
+      canvasContext.fillText('Computer Won!', canvas.width-200, 150);
     }
-    canvasContext.fillStyle = 'midnightblue';
-    canvasContext.fillText('Click to Continue', 400, 300);
-    return;
-  }
+      canvasContext.fillStyle = 'midnightblue';
+      canvasContext.fillText('Click to Continue', 350, 300);
+      return;
+    }
 
-  // net drawwing
-  Net();
-  // left paddle
-  colorRect(0,paddle1Y,PADDLE_THICKNESS,PADDLE_HEIGHT,'midnightblue');
-  // right paddle
-  colorRect(canvas.width-PADDLE_THICKNESS,paddle2Y,PADDLE_THICKNESS,PADDLE_HEIGHT,'midnightblue');
-  // ball
-  colorRect(ballX,ballY,20,20,'midnightblue');
-  // scores
-  canvasContext.fillText(score1, 100, 100);
-  canvasContext.fillText(score2, canvas.width-100, 100);
+    // net drawwing
+    Net();
+    // left paddle
+    colorRect(0,paddle1Y,PADDLE_THICKNESS,PADDLE_HEIGHT,'midnightblue');
+    // right paddle
+    colorRect(canvas.width-PADDLE_THICKNESS,paddle2Y,PADDLE_THICKNESS,PADDLE_HEIGHT,'midnightblue');
+    // ball
+    colorRect(ballX,ballY,20,20,'midnightblue');
+    // scores
+    canvasContext.fillText(score1, 100, 100);
+    canvasContext.fillText('_', 100, 110);
+    canvasContext.fillText(score2, canvas.width-100, 100);
+    canvasContext.fillText('_', canvas.width-100, 110);
+  }
 }
 
 function ballRest(){
