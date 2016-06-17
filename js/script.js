@@ -17,8 +17,8 @@ var score1 = 0;
 var score2 = 0;
 const WIN_SCORE = 3;
 var showWin = false;
-// Main Game Logic
 
+// Main Game Logic
 function calMousePos(evt){
   var rect = canvas.getBoundingClientRect();
   var root = document.documentElement;
@@ -77,7 +77,7 @@ function movement(){
     return;
   }
 
-  // aiPaddle();
+  aiPaddle();
   // main function for ball movement
   ballX += ballSpeedX;
   ballY +=ballSpeedY;
